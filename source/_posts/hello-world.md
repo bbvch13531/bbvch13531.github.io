@@ -1,8 +1,6 @@
 ---
 title: Hello World
-year: 2020
-month: 3
-day: 22
+date: 2020-03-22 13:52:07
 ---
 Welcome to [Hexo](https://hexo.io/)! This is your very first post. Check [documentation](https://hexo.io/docs/) for more info. If you get any problems when using Hexo, you can find the answer in [troubleshooting](https://hexo.io/docs/troubleshooting.html) or you can ask me on [GitHub](https://github.com/hexojs/hexo/issues).
 
