@@ -94,6 +94,7 @@ ignore:
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 remote_theme: clean-blog
+theme: clean-blog
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
