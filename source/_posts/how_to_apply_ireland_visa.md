@@ -52,3 +52,4 @@ TU Dublin 교환학생을 준비하며 정보를 정리하는 글이다.
 [^2]: [아일랜드 IRP 예약 사이](https://burghquayregistrationoffice.inis.gov.ie/)
 [^3]: 왕복항공권이라고 명시되어 있지만 6개월 이상 학생비자인 경우 대부분 문제가 되지 않는다고 한다. 하지만 [그렇지 않은 경우](https://m.blog.naver.com/PostView.nhn?blogId=ssykk&logNo=221197206926&proxyReferer=https%3A%2F%2Fwww.google.com%2F)도 있음. 
 
+test...
