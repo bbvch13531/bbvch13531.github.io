@@ -5,7 +5,7 @@ node_js:
 cache: npm
 branches:
   only:
-    - develop # build master branch only
+    - develop # build develop branch only
 script:
   - hexo generate # generate static files
 
