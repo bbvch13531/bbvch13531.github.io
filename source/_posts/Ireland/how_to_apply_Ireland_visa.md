@@ -1,7 +1,7 @@
 ---
 title: Ireland logging (1) 교환학생 비자(IRP) 발급받는 방법
 date: 2020-03-27 22:19:10
-tags: 아일랜드, 비자, 교환학생
+tags: Ireland, visa
 ---
 
 # Ireland logging (1) 교환학생 비자(IRP) 발급받는 방법

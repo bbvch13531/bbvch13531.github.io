@@ -1,7 +1,7 @@
 ---
 title: Ireland logging (2) 짐 싸기
 date: 2020-04-02 16:22:19
-tags:
+tags: Ireland
 ---
 
 # Ireland logging (2) 짐 싸기

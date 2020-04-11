@@ -18,3 +18,16 @@ DIT사이트에 들어가면 로고도 TU Dublin으로 바뀜.
 4. 기숙사, 비행기 티켓, 해외 보험, 비자를 준비한다.
 5. 준비를 끝내고 출국한다.
 
+<!-- {% asset_img image1.png hello %} -->
+
+
+https://www.dit.ie/erasmusandexchange/incomingstudents/
+home - Erasmus and Exchange - Incoming Students
+
+This is your application link below:
+
+Erasmus + Application Form (incoming): <-- 링크 클릭
+
+https://tudublin.moveonfr.com/locallogin 로 시작하는 사이트에서 회원가입, 로그인
+{% asset_img login_page.png login_page %}
+
