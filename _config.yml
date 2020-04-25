@@ -1,6 +1,11 @@
 # Hexo Configuration
 ## Docs: https://hexo.io/docs/configuration.html
 ## Source: https://github.com/hexojs/hexo/
+# Header
+menu:
+  Home: /
+  Archives: /archives
+  Categories: /categories
 
 # hexo renderer markdown - footnote
 markdown:
@@ -17,8 +22,8 @@ markdown:
     collisionSuffix: ''
     permalink: false
 # Site
-title: bbvch13531
-subtitle: ''
+title: 'bbvch13531'
+subtitle: 'The scene of the day'
 description: ''
 keywords:
 author: Kyungyoung Heo
