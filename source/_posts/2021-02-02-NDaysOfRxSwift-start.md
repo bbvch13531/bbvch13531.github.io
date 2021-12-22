@@ -1,6 +1,6 @@
 ---
-title: NDaysOfRxSwift-start
-date: 2021-02-02 14:41:08 +0900
+title: "NDaysOfRxSwift-start"
+date: 2021-02-02 14:41:08
 description: N-Days of RxSwift
 tags: [RxSwift, Swift]
 img:  # Add image post (optional)
