@@ -623,6 +623,16 @@
     "escape-string-regexp" "^2.0.0"
     "graceful-fs" "^4.1.11"
 
+"hexo-fs@^2.0.1":
+  "integrity" "sha512-IgAhdjYN3GCluy2MSeeX+F/RkyVsjjzZO7Bbhj3aYoSBqcJhJsR1Nz+Powp26siQPuIFLNNYjqmfPbVg2vg+Mg=="
+  "resolved" "https://registry.npmjs.org/hexo-fs/-/hexo-fs-2.0.1.tgz"
+  "version" "2.0.1"
+  dependencies:
+    "bluebird" "^3.5.1"
+    "chokidar" "^3.0.0"
+    "escape-string-regexp" "^2.0.0"
+    "graceful-fs" "^4.1.11"
+
 "hexo-generator-archive@^1.0.0":
   "integrity" "sha512-24TeanDGpMBUIq37DHpSESQbeN6ssZ06edsGSI76tN4Yit50TgsgzP5g5DSu0yJk0jUtHJntysWE8NYAlFXibA=="
   "resolved" "https://registry.npmjs.org/hexo-generator-archive/-/hexo-generator-archive-1.0.0.tgz"
@@ -750,7 +760,7 @@
     "strip-indent" "^3.0.0"
     "striptags" "^3.1.1"
 
-"hexo-util@^1.8.0":
+"hexo-util@^1.9.1":
   "integrity" "sha512-B6+nVi4Zpy7NPzlIcTLn9YBGb2Ly0q11mRzg6DyFWg0IfcrfF4tlWO0vRXqJVhvRyg+tIfUihmgypkiUW1IjNQ=="
   "resolved" "https://registry.npmjs.org/hexo-util/-/hexo-util-1.9.1.tgz"
   "version" "1.9.1"
@@ -766,10 +776,10 @@
     "strip-indent" "^3.0.0"
     "striptags" "^3.1.1"
 
-"hexo@^4.0.0", "hexo@^4.2.0":
-  "integrity" "sha512-j2Kzgx/eWF0IgSfUEsAAhr0mDaaqR3E1MTus0/Vrs+JpQdMiSlqSbudPf2S9O4FHi5CAzDCuzToGlg2kgoQxcA=="
-  "resolved" "https://registry.npmjs.org/hexo/-/hexo-4.2.0.tgz"
-  "version" "4.2.0"
+"hexo@^4.0.0", "hexo@^4.2.1":
+  "integrity" "sha512-V7kJsL4m2HM0Czm0j0ZDLJWxv5OJvbpTWgk0cCKcvHg2Dd/SVgtyLI+ygoPPrMipTquxii6waF5l44Op0bMEEQ=="
+  "resolved" "https://registry.npmjs.org/hexo/-/hexo-4.2.1.tgz"
+  "version" "4.2.1"
   dependencies:
     "abbrev" "^1.1.1"
     "archy" "^1.0.0"
@@ -777,10 +787,10 @@
     "chalk" "^3.0.0"
     "hexo-cli" "^3.0.0"
     "hexo-front-matter" "^1.0.0"
-    "hexo-fs" "^2.0.0"
+    "hexo-fs" "^2.0.1"
     "hexo-i18n" "^1.0.0"
     "hexo-log" "^1.0.0"
-    "hexo-util" "^1.8.0"
+    "hexo-util" "^1.9.1"
     "js-yaml" "^3.12.0"
     "lodash" "^4.17.11"
     "micromatch" "^4.0.2"
