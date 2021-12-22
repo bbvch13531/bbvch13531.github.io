@@ -8,10 +8,6 @@ menu:
     url: https://github.com/bbvch13531
     icon: github
 
-Site:
-  title: 0xky's blog
-  author: ky
-  timezone: KR
 # Title on top left of menu. Leave empty to use main blog title
 menu_title: Configurable Title
 
