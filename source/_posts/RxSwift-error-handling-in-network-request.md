@@ -165,6 +165,10 @@ button의 tap 이벤트 마다 `viewModel.service.request()`를 실행하고 그
 
 `flatMapLatest`는 RxSwift의 공식 문서를 참조
 
+<p style="text-align: center">
+<img src="/images/flatMap.png" width=600 >
+</p>
+
 `Observable의 element마다 새로운 Observable를 생성하고, 생성된 여러개의 새로운 시퀀스를 하나의 시퀀스로 합쳐준다.`
 버튼 탭 이벤트가 여러번 발생하고, 그 이벤트마다 `Observable<MyData>`를 생성한다.
 이때 각각의 `Observable<MyData>`를 하나의 시퀀스로 합쳐주는 역할을 한다.
@@ -172,6 +176,10 @@ button의 tap 이벤트 마다 `viewModel.service.request()`를 실행하고 그
 
 `flatMapLatest`는 network response를 리턴한다. 여기서 에러가 발생하면 `.do(onError:)` 를 실행하고 `catch()` 에서 `Observable.empty()`를 리턴한다.
 에러가 발생하지 않는 경우에는 `.subscribe(onNext:)`에서 print(myData)를 실행한다.
+
+<p style="text-align: center">
+<img src="/images/doOnError.png" width=600 >
+</p>
 
 기존에는 에러 핸들링을 하기 위해 `catch()` 에서 `Observable.empty()`를 리턴했다. 하지만 이 경우에도 시퀀스는 종료됨을 새로 알게 되었다. (completed, disposed 되지는 않았다.)
 네트워크가 실패한 경우 종료된 시퀀스에 다시 바인딩이 필요했다. request 요청 후 에러가 발생할 때마다 매번 다시 바인딩하는건 비효율적이라고 생각되어 개선했다.
