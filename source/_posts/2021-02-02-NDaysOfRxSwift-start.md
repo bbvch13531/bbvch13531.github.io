@@ -1,7 +1,9 @@
 ---
 title: NDaysOfRxSwift-start
-date: 2021-02-02 14:41:08
-tags: RxSwift, Swift
+date: 2021-02-02 14:41:08 +0900
+description: N-Days of RxSwift
+tags: [RxSwift, Swift]
+img:  # Add image post (optional)
 ---
 
 RxSwift를 오늘 공부하기로 마음먹고 꾸준하게 연습하는 것을 목표로 삼았다. 100 days of code에서 영감받아 N days of RxSwift를 시작한다.
