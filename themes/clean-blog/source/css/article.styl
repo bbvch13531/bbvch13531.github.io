@@ -50,12 +50,11 @@ article
           float left
 
 figure.highlight
-  background #eee
+  background #0d1117
   border 1px solid color-border
   margin-top 15px
   padding 7px 15px
   border-radius 2px
-  text-shadow 0 0 1px #fff
   line-height 1.6
   overflow auto
   position relative
@@ -80,7 +79,7 @@ figure.highlight
     border-spacing 0
 
     .gutter
-      color color-meta
+      color #fff
       padding-right 15px
       border-right 1px solid color-border
       text-align right
@@ -90,12 +89,17 @@ figure.highlight
       border-left 1px solid #fff
       color #666
 
-    .line
-      height: 20px
-
     .line.marked
       background: #d6d6d6
+ 		
+    .line
+      height: 20px
+			color #fff !important
 
+pre.line
+	color #fff !important;
+
+/*
 pre
   // Theme: Solarized - Light
   // More theme here: http://softwaremaniacs.org/media/soft/highlight/test.html
@@ -166,3 +170,4 @@ pre
 
   .deletion
     color #dc322f
+		*/

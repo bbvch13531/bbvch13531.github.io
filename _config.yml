@@ -51,8 +51,8 @@ i18n_dir: :lang
 skip_render:
 
 # Writing
-new_post_name: :title.md # File name of new posts
 default_layout: post
+new_post_name: :year-:month-:day-:title.md # File name of new posts
 titlecase: false # Transform title into titlecase
 external_link:
   enable: true # Open external links in new tab
@@ -63,13 +63,14 @@ render_drafts: false
 post_asset_folder: false
 relative_link: false
 future: true
+
 highlight:
   enable: true
-  line_number: true
   auto_detect: false
-  tab_replace: ''
+  line_number: true
+  tab_replace: '  '
   wrap: true
-  hljs: false
+  hljs: true
 
 # Home page setting
 # path: Root path for your blogs index page. (default = '')

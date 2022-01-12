@@ -9,6 +9,38 @@ Network Request 요청하는 기능은 iOS앱 개발할 때 항상 구현하는 
 
 내가 사용하는 일반적인 NetworkService Class는 다음과 같다.
 
+{% codeblock lang:swift %}
+// NetworkService.swift
+
+protocol NetworkServiceType {
+    func requestSomething(completion: @escaping (Result<MyData, NetworkError>) -> Void)
+}
+
+class NetworkService {
+    func requestSomething(completion: @escaping (Result<MyData, NetworkError>) -> Void)
+        let url = "someApiEndpointURL"
+        AF.request(url, method: .get)
+            .validate()
+            .responseData { response in 
+            switch response.result {
+                case .success(let data):
+                    let decoder = JSONDecoder()
+                    guard let data = data,
+                        let myData = try? decoder.decode(MyData.self, from: data) else {
+                        completion(.failure(NetworkError.JSONParseError))
+                    }
+                    completion(.success(myData))
+
+                case .failure(let error):
+                    completion(.failure(NetworkError.InvalidResponse))
+                }
+            }
+    }
+}
+
+{% endcodeblock %}
+
+
 ```swift
 // NetworkService.swift
 
