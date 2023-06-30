@@ -118,4 +118,6 @@ theme: clean-blog
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  - type: ''
+  type: git
+  repo: https://github.com/bbvch13531/bbvch13531.github.io
+  branch: master
