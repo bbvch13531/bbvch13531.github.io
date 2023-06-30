@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="kr">
+
+<!-- Head tag -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/github-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
+<head>
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <!--Description-->
+
+    
+
+    
+        <meta name="description" content="Network Request 요청하는 기능은 iOS앱 개발할 때 항상 구현하는 아주 당연한 기능이다.
+내가 사용하는 일반적인 NetworkService Class는 다음과 같다.
+12345678910111213141516171819202122232425262728// "/>
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="KY"/>
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="RxSwift error handling in network request"/>
+    
+
+    <!--Open Graph Description-->
+    
+        <meta property="og:description" content="Network Request 요청하는 기능은 iOS앱 개발할 때 항상 구현하는 아주 당연한 기능이다.
+내가 사용하는 일반적인 NetworkService Class는 다음과 같다.
+12345678910111213141516171819202122232425262728// "/>
+    
+
+    <!--Open Graph Site Name-->
+        <meta property="og:site_name" content="0xky blog"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article"/>
+    
+
+    <!--Page Cover-->
+    
+    
+        <meta property="og:image" content="http://0xky.nethttp://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg"/>
+    
+
+        <meta name="twitter:card" content="summary_large_image"/>
+
+    
+
+    
+        <meta name="twitter:image" content="http://0xky.nethttp://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg"/>
+    
+
+    <!-- Title -->
+    
+    <title>RxSwift error handling in network request - 0xky blog</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css"/>
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css"/>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet"/>
+
+    <!-- Google Analytics -->
+    
+
+
+    <!-- favicon -->
+    
+    <link rel="icon" href="/img/favicon32.png"/>
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+
+    <!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Configurable Title</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/">
+                            
+                                Home
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/archives">
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories">
+                            
+                                Categories
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/tags">
+                            
+                                Tags
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="https://github.com/bbvch13531" target="_blank" rel="noopener">
+                            
+                                <i class="fa fa-github fa-stack-2x"></i>
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('http://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>RxSwift error handling in network request</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        
+                            2021-12-23
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+                <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 post-tags">
+                    
+                        
+
+
+<a href="/tags/RxSwift/">#RxSwift</a>
+
+
+                    
+                </div>
+                <div class="col-lg-4 col-md-5 post-categories">
+                    
+                </div>
+            
+
+            <!-- Gallery -->
+            
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <p>Network Request 요청하는 기능은 iOS앱 개발할 때 항상 구현하는 아주 당연한 기능이다.</p>
+<p>내가 사용하는 일반적인 NetworkService Class는 다음과 같다.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-comment">// NetworkService.swift</span><br><br><span class="hljs-class"><span class="hljs-keyword">protocol</span> <span class="hljs-title">NetworkServiceType</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">requestSomething</span><span class="hljs-params">(completion: @escaping <span class="hljs-params">(Result&lt;MyData, NetworkError&gt;)</span></span></span> -&gt; <span class="hljs-type">Void</span>)<br>&#125;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NetworkService</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">requestSomething</span><span class="hljs-params">(completion: @escaping <span class="hljs-params">(Result&lt;MyData, NetworkError&gt;)</span></span></span> -&gt; <span class="hljs-type">Void</span>)<br>        <span class="hljs-keyword">let</span> url = <span class="hljs-string">"someApiEndpointURL"</span><br>        <span class="hljs-type">AF</span>.request(url, method: .<span class="hljs-keyword">get</span>)<br>            .validate()<br>            .responseData &#123; response <span class="hljs-keyword">in</span> <br>            <span class="hljs-keyword">switch</span> response.result &#123;<br>                <span class="hljs-keyword">case</span> .success(<span class="hljs-keyword">let</span> data):<br>                    <span class="hljs-keyword">let</span> decoder = <span class="hljs-type">JSONDecoder</span>()<br>                    <span class="hljs-keyword">guard</span> <span class="hljs-keyword">let</span> data = data,<br>                        <span class="hljs-keyword">let</span> myData = <span class="hljs-keyword">try</span>? decoder.decode(<span class="hljs-type">MyData</span>.<span class="hljs-keyword">self</span>, from: data) <span class="hljs-keyword">else</span> &#123;<br>                        completion(.failure(<span class="hljs-type">NetworkError</span>.<span class="hljs-type">JSONParseError</span>))<br>                    &#125;<br>                    completion(.success(myData))<br><br>                <span class="hljs-keyword">case</span> .failure(<span class="hljs-keyword">let</span> error):<br>                    completion(.failure(<span class="hljs-type">NetworkError</span>.<span class="hljs-type">InvalidResponse</span>))<br>                &#125;<br>            &#125;<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-comment">// NetworkService.swift</span><br><br><span class="hljs-class"><span class="hljs-keyword">protocol</span> <span class="hljs-title">NetworkServiceType</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">requestSomething</span><span class="hljs-params">(completion: @escaping <span class="hljs-params">(Result&lt;MyData, NetworkError&gt;)</span></span></span> -&gt; <span class="hljs-type">Void</span>)<br>&#125;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NetworkService</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">requestSomething</span><span class="hljs-params">(completion: @escaping <span class="hljs-params">(Result&lt;MyData, NetworkError&gt;)</span></span></span> -&gt; <span class="hljs-type">Void</span>)<br>        <span class="hljs-keyword">let</span> url = <span class="hljs-string">"someApiEndpointURL"</span><br>        <span class="hljs-type">AF</span>.request(url, method: .<span class="hljs-keyword">get</span>)<br>            .validate()<br>            .responseData &#123; response <span class="hljs-keyword">in</span> <br>            <span class="hljs-keyword">switch</span> response.result &#123;<br>                <span class="hljs-keyword">case</span> .success(<span class="hljs-keyword">let</span> data):<br>                    <span class="hljs-keyword">let</span> decoder = <span class="hljs-type">JSONDecoder</span>()<br>                    <span class="hljs-keyword">guard</span> <span class="hljs-keyword">let</span> data = data,<br>                        <span class="hljs-keyword">let</span> myData = <span class="hljs-keyword">try</span>? decoder.decode(<span class="hljs-type">MyData</span>.<span class="hljs-keyword">self</span>, from: data) <span class="hljs-keyword">else</span> &#123;<br>                        completion(.failure(<span class="hljs-type">NetworkError</span>.<span class="hljs-type">JSONParseError</span>))<br>                    &#125;<br>                    completion(.success(myData))<br><br>                <span class="hljs-keyword">case</span> .failure(<span class="hljs-keyword">let</span> error):<br>                    completion(.failure(<span class="hljs-type">NetworkError</span>.<span class="hljs-type">InvalidResponse</span>))<br>                &#125;<br>            &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><code>ViewController</code>의 <code>viewDidLoad()</code>에서 호출한다고 가정했을 때</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-comment">// ViewController.swift</span><br><br><span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">viewDidLoad</span><span class="hljs-params">()</span></span> &#123;<br>    <span class="hljs-keyword">super</span>.viewDidLoad()<br>    <span class="hljs-keyword">let</span> service = <span class="hljs-type">NetworkService</span>()<br><br>    service.requestSomething &#123; result <span class="hljs-keyword">in</span> <br>        <span class="hljs-keyword">switch</span> result &#123;<br>            <span class="hljs-keyword">case</span> .success(<span class="hljs-keyword">let</span> myData):<br>                <span class="hljs-built_in">print</span>(myData)<br>            <span class="hljs-keyword">case</span> .failure(<span class="hljs-keyword">let</span> error):<br>                <span class="hljs-built_in">print</span>(error)<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>이 코드를 MVVM과 RxSwift를 이용해 개선하는 과정에서 에러처리가 의도한 대로 동작하지 않아 시행착오를 겪었다.</p>
+<p>개선한 구조는 다음과 같다.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-comment">// ViewController.swift</span><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ViewController</span>: <span class="hljs-title">UIViewController</span> </span>&#123;<br>    <span class="hljs-keyword">let</span> viewModel = <span class="hljs-type">ViewModel</span>()<br>    <span class="hljs-keyword">let</span> disposeBag = <span class="hljs-type">DisposeBag</span>()<br>    <span class="hljs-keyword">let</span> button: <span class="hljs-type">UIButton</span> = &#123;<br>        <span class="hljs-keyword">let</span> button = <span class="hljs-type">UIButton</span>(frame: .zero)<br>        button.setTitle(<span class="hljs-string">"request"</span>, <span class="hljs-keyword">for</span>: .normal)<br>        <span class="hljs-keyword">return</span> button<br>    &#125;()<br><br>    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">viewDidLoad</span><span class="hljs-params">()</span></span> &#123;<br>        <span class="hljs-keyword">super</span>.viewDidLoad()<br>        setupUI()<br>        bind()<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">bind</span><span class="hljs-params">()</span></span> &#123;<br>        button.rx.tap<br>            .flatMapLatest &#123; [<span class="hljs-keyword">weak</span> <span class="hljs-keyword">self</span>] <span class="hljs-number">_</span> -&gt; <span class="hljs-type">Observable</span>&lt;<span class="hljs-type">MyData</span>&gt; <span class="hljs-keyword">in</span><br>                <span class="hljs-keyword">guard</span> <span class="hljs-keyword">let</span> ss = <span class="hljs-keyword">self</span> <span class="hljs-keyword">else</span> &#123; <span class="hljs-keyword">return</span> <span class="hljs-type">Observable</span>.empty() &#125;<br>                <span class="hljs-keyword">return</span> ss.viewModel.service.request()<br>                    .<span class="hljs-keyword">do</span>(onError: &#123; error <span class="hljs-keyword">in</span> <span class="hljs-built_in">print</span>(<span class="hljs-string">"error \(error) in flatMapLatest"</span>)&#125;)<br>                    .<span class="hljs-keyword">catch</span> &#123; <span class="hljs-number">_</span> <span class="hljs-keyword">in</span> <span class="hljs-keyword">return</span> <span class="hljs-type">Observable</span>.empty() &#125;<br>            &#125;<br>            .subscribe(onNext: &#123; myData <span class="hljs-keyword">in</span><br>                <span class="hljs-built_in">print</span>(myData)<br>            &#125;, onError: &#123; error <span class="hljs-keyword">in</span><br>                <span class="hljs-built_in">print</span>(<span class="hljs-string">"onError \(error)"</span>)<br>            &#125;, onCompleted: &#123;<br>                <span class="hljs-built_in">print</span>(<span class="hljs-string">"onCompleted"</span>)<br>            &#125;, onDisposed: &#123;<br>                <span class="hljs-built_in">print</span>(<span class="hljs-string">"onDisposed"</span>)<br>            &#125;)<br>            .disposed(by: <span class="hljs-keyword">self</span>.disposeBag)<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-comment">// ViewModel.swift</span><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ViewModel</span> </span>&#123;<br>    <span class="hljs-keyword">let</span> service = <span class="hljs-type">NetworkService</span>()<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-comment">// NetworkService.swift</span><br><br> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">request</span><span class="hljs-params">()</span></span> -&gt; <span class="hljs-type">Observable</span>&lt;<span class="hljs-type">MyData</span>&gt; &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-type">Observable</span>.create &#123; observer <span class="hljs-keyword">in</span><br>            <br>            <span class="hljs-type">AF</span>.request(url)<br>                .responseData &#123; response <span class="hljs-keyword">in</span><br>                    <span class="hljs-keyword">switch</span> response.result &#123;<br>                    <span class="hljs-keyword">case</span> .success(<span class="hljs-keyword">let</span> data):<br>                        <span class="hljs-keyword">let</span> decoder = <span class="hljs-type">JSONDecoder</span>()<br>                        <span class="hljs-keyword">guard</span> <span class="hljs-keyword">let</span> decodedData = <span class="hljs-keyword">try</span>? decoder.decode(<span class="hljs-type">MyData</span>.<span class="hljs-keyword">self</span>, from: data) <span class="hljs-keyword">else</span> &#123;<br>                            observer.onError(<span class="hljs-type">NetworkError</span>.<span class="hljs-type">JSONParseError</span>)<br>                            <span class="hljs-keyword">return</span><br>                        &#125;<br>                        observer.onNext(decodedData)<br>                    <span class="hljs-keyword">case</span> .failure(<span class="hljs-number">_</span>):<br>                        observer.onError(<span class="hljs-type">NetworkError</span>.<span class="hljs-type">InvalidResponse</span>)<br>                    &#125;<br>                    observer.onCompleted()<br>                &#125;<br>            <span class="hljs-keyword">return</span> <span class="hljs-type">Disposables</span>.create()<br>        &#125;<br>    &#125;<br></code></pre></td></tr></table></figure>
+<p>이번 글에서 말하고 싶은 부분은 <code>ViewController.swift</code>의 <code>bind()</code>의 코드다.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-comment">// ViewController.swift</span><br><br>button.rx.tap<br>    .flatMapLatest &#123; [<span class="hljs-keyword">weak</span> <span class="hljs-keyword">self</span>] <span class="hljs-number">_</span> -&gt; <span class="hljs-type">Observable</span>&lt;<span class="hljs-type">MyData</span>&gt; <span class="hljs-keyword">in</span><br>        <span class="hljs-keyword">guard</span> <span class="hljs-keyword">let</span> ss = <span class="hljs-keyword">self</span> <span class="hljs-keyword">else</span> &#123; <span class="hljs-keyword">return</span> <span class="hljs-type">Observable</span>.empty() &#125;<br>        <span class="hljs-keyword">return</span> ss.viewModel.service.request()<br>            .<span class="hljs-keyword">do</span>(onError: &#123; error <span class="hljs-keyword">in</span> <span class="hljs-built_in">print</span>(<span class="hljs-string">"error \(error) in flatMapLatest"</span>)&#125;)<br>            .<span class="hljs-keyword">catch</span> &#123; <span class="hljs-number">_</span> <span class="hljs-keyword">in</span> <span class="hljs-keyword">return</span> <span class="hljs-type">Observable</span>.empty() &#125;<br>    &#125;<br>    .subscribe(onNext: &#123; myData <span class="hljs-keyword">in</span><br>        <span class="hljs-built_in">print</span>(myData)<br>    &#125;, onError: &#123; error <span class="hljs-keyword">in</span><br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">"onError \(error)"</span>)<br>    &#125;, onCompleted: &#123;<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">"onCompleted"</span>)<br>    &#125;, onDisposed: &#123;<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">"onDisposed"</span>)<br>    &#125;)<br>    .disposed(by: <span class="hljs-keyword">self</span>.disposeBag)<br></code></pre></td></tr></table></figure>
+<p>button의 tap 이벤트 마다 <code>viewModel.service.request()</code>를 실행하고 그 결과를 <code>flatMapLatest</code>에서 리턴한다.</p>
+<p><code>flatMapLatest</code>는 RxSwift의 공식 문서를 참조</p>
+<p style="text-align: center">
+<img src="/images/flatMap.png" width=600 >
+</p>
+<p><code>Observable의 element마다 새로운 Observable를 생성하고, 생성된 여러개의 새로운 시퀀스를 하나의 시퀀스로 합쳐준다.</code><br>
+버튼 탭 이벤트가 여러번 발생하고, 그 이벤트마다 <code>Observable&lt;MyData&gt;</code>를 생성한다.<br>
+이때 각각의 <code>Observable&lt;MyData&gt;</code>를 하나의 시퀀스로 합쳐주는 역할을 한다.</p>
+<p><code>flatMapLatest</code>는 network response를 리턴한다. 여기서 에러가 발생하면 <code>.do(onError:)</code> 를 실행하고 <code>catch()</code> 에서 <code>Observable.empty()</code>를 리턴한다.<br>
+에러가 발생하지 않는 경우에는 <code>.subscribe(onNext:)</code>에서 print(myData)를 실행한다.</p>
+<p style="text-align: center">
+<img src="/images/doOnError.png" width=600 >
+</p>
+<p>기존에는 에러 핸들링을 하기 위해 <code>catch()</code> 에서 <code>Observable.empty()</code>를 리턴했다. 하지만 이 경우에도 시퀀스는 종료됨을 새로 알게 되었다. (completed, disposed 되지는 않았다.)<br>
+네트워크가 실패한 경우 종료된 시퀀스에 다시 바인딩이 필요했다. request 요청 후 에러가 발생할 때마다 매번 다시 바인딩하는건 비효율적이라고 생각되어 개선했다.</p>
+<p>button의 tap 이벤트를 <code>tableView</code>의 <code>refreshControl</code>이나, <code>scrollEvent</code>으로 활용할 수 있을 것 같다.</p>
+
+
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
+            
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+    <hr />
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                        <li>
+                            <a href="https://twitter.com/bbvch13531" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+
+                    
+                        <li>
+                            <a href="https://github.com/bbvch13531" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+
+                    
+
+                    
+                </ul>
+                <p class="copyright text-muted">&copy; 2023 KY<br></p>
+                <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p>
+                <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <!-- After footer scripts -->
+    
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="kr">
+
+<!-- Head tag -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/github-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
+<head>
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <!--Description-->
+
+    
+
+    
+        <meta name="description" content="이전 글에서는 music-dl 프로젝트를 시작하게 된 이유를 아주 길게 설명했다.
+이번에는 프로젝트의 구성과 점진적으로 개선한 과정을 설명하는 글을 써보려고 한다.
+이 글은 더 나은 음악감상을 위해 나처럼 헤매는 사람들이 시도해볼 수 있게 하는 목적으로 최대한 친절하게"/>
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="KY"/>
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="music-dl(2) 프로젝트 구성과정"/>
+    
+
+    <!--Open Graph Description-->
+    
+        <meta property="og:description" content="이전 글에서는 music-dl 프로젝트를 시작하게 된 이유를 아주 길게 설명했다.
+이번에는 프로젝트의 구성과 점진적으로 개선한 과정을 설명하는 글을 써보려고 한다.
+이 글은 더 나은 음악감상을 위해 나처럼 헤매는 사람들이 시도해볼 수 있게 하는 목적으로 최대한 친절하게"/>
+    
+
+    <!--Open Graph Site Name-->
+        <meta property="og:site_name" content="0xky blog"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article"/>
+    
+
+    <!--Page Cover-->
+    
+    
+        <meta property="og:image" content="http://0xky.nethttp://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg"/>
+    
+
+        <meta name="twitter:card" content="summary_large_image"/>
+
+    
+
+    
+        <meta name="twitter:image" content="http://0xky.nethttp://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg"/>
+    
+
+    <!-- Title -->
+    
+    <title>music-dl(2) 프로젝트 구성과정 - 0xky blog</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css"/>
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css"/>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet"/>
+
+    <!-- Google Analytics -->
+    
+
+
+    <!-- favicon -->
+    
+    <link rel="icon" href="/img/favicon32.png"/>
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+
+    <!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Configurable Title</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/">
+                            
+                                Home
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/archives">
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories">
+                            
+                                Categories
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/tags">
+                            
+                                Tags
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="https://github.com/bbvch13531" target="_blank" rel="noopener">
+                            
+                                <i class="fa fa-github fa-stack-2x"></i>
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('http://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>music-dl(2) 프로젝트 구성과정</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        
+                            2021-08-21
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+                <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 post-tags">
+                    
+                        
+
+
+<a href="/tags/muisic-dl/">#muisic-dl</a> <a href="/tags/Side-project/">#Side project</a>
+
+
+                    
+                </div>
+                <div class="col-lg-4 col-md-5 post-categories">
+                    
+                </div>
+            
+
+            <!-- Gallery -->
+            
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <p>이전 글에서는 music-dl 프로젝트를 시작하게 된 이유를 아주 길게 설명했다.<br>
+이번에는 프로젝트의 구성과 점진적으로 개선한 과정을 설명하는 글을 써보려고 한다.<br>
+이 글은 더 나은 음악감상을 위해 나처럼 헤매는 사람들이 시도해볼 수 있게 하는 목적으로 최대한 친절하게 써보려고 노력했다. 프로그래밍 경험이 있으신 분들이라면 그리 어렵지 않게 할 수 있을 정도로 간단한 프로젝트이긴 하다.</p>
+<p>내가 가장 처음에 했던 방법은 <code>youtube-dl --list-formats https://www.youtube.com/watch\?v=[VIDEOID]</code> 로 다운로드 가능한 포맷을 알아보는 거였다.</p>
+<p>다음과 같은 결과물을 얻을 수 있다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs plain">format code  extension  resolution note<br>249          webm       audio only tiny   59k , opus @ 50k (48000Hz), 1.22MiB<br>250          webm       audio only tiny   73k , opus @ 70k (48000Hz), 1.61MiB<br>140          m4a        audio only tiny  130k , m4a_dash container, mp4a.40.2@128k (44100Hz), 3.26MiB<br>251          webm       audio only tiny  137k , opus @160k (48000Hz), 3.17MiB<br>160          mp4        256x144    144p   56k , avc1.4d400c, 24fps, video only, 1.15MiB<br>394          mp4        256x144    144p   69k , av01.0.00M.08, 24fps, video only, 1.64MiB<br>278          webm       256x144    144p   96k , webm container, vp9, 24fps, video only, 2.15MiB<br>133          mp4        426x240    240p  121k , avc1.4d4015, 24fps, video only, 2.42MiB<br>242          webm       426x240    240p  129k , vp9, 24fps, video only, 2.66MiB<br>395          mp4        426x240    240p  138k , av01.0.00M.08, 24fps, video only, 3.06MiB<br>134          mp4        640x360    360p  219k , avc1.4d401e, 24fps, video only, 4.42MiB<br>243          webm       640x360    360p  224k , vp9, 24fps, video only, 4.62MiB<br>396          mp4        640x360    360p  272k , av01.0.01M.08, 24fps, video only, 6.04MiB<br>244          webm       854x480    480p  318k , vp9, 24fps, video only, 6.59MiB<br>135          mp4        854x480    480p  330k , avc1.4d401e, 24fps, video only, 6.73MiB<br>397          mp4        854x480    480p  459k , av01.0.04M.08, 24fps, video only, 10.21MiB<br>247          webm       1280x720   720p  523k , vp9, 24fps, video only, 10.94MiB<br>136          mp4        1280x720   720p  535k , avc1.4d401f, 24fps, video only, 10.46MiB<br>398          mp4        1280x720   720p  831k , av01.0.05M.08, 24fps, video only, 18.58MiB<br>18           mp4        640x360    360p  409k , avc1.42001E, 24fps, mp4a.40.2@ 96k (44100Hz), 10.28MiB (best)<br></code></pre></td></tr></table></figure>
+<p>오디오파일을 원하는 경우에는 format code가 251인 webm형식을 이용하면 된다.<br>
+<code>youtube-dl -f 251 https://www.youtube.com/watch\?v=[VIDEOID]</code> 를 실행하면 VIDEOID에 해당하는 영상을 지정한 포맷으로 다운로드할 수 있다.<br>
+하지만 이 과정 이후에 webm 형식의 파일을 mp3로 변환하는 추가적인 작업이 필요하다.<br>
+그리고 이 방법은 한개의 영상에 대해서만 가능하다. 플레이리스트에 있는 몇백개의 영상을 다운받기 위해서는 다른 방법이 필요하다.</p>
+<p>youtube-dl은 플레이리스트를 지정해서 플레이리스트 전체를 다운로드할 수 있는 옵션을 지원한다.<br>
+그리고 특정 포맷을 지정하지 않고도 오디오파일로 다운로드하는 옵션과 webm을 mp3로 변환해주는 옵션도 있다.<br>
+플레이리스트별로 다운받으려면 각각의 디렉토리 지정이 필요하다. 파일명 포맷을 지정하는 옵션도 있어서 이러한 옵션들을 이용하면 다음과 같이 개선할 수 있다.</p>
+<p><code>youtube-dl --extract-audio --audio-format mp3 -o &quot;playlist1/%(title)s.%(ext)s&quot; https://www.youtube.com/playlist\?list\=[PLAYLISTID]</code></p>
+<p>플레이리스트 저장기능을 이대로 쓰면 노래를 한 곡만 추가해도 다음번엔 모든 노래를 다시 다운로드받는 문제가 있다.<br>
+youtube-dl에서 지원하는 --download-archive 옵션을 이용하면 새로 추가된 노래만 다운받을 수 있다.</p>
+<p><code>youtube-dl --extract-audio --audio-format mp3 --download-archive downloaded_file.txt -o &quot;playlist1/%(title)s.%(ext)s&quot; https://www.youtube.com/playlist\?list\=[PLAYLISTID]</code><br>
+downloaded_file.txt 파일에는 다운받은 video_id들이 추가된다.</p>
+<p>이 커맨드를 플레이리스트에 노래를 추가할 때마다 실행할 수 없으니, 일정시간마다 반복하기 위해서 cron job을 이용했다.<br>
+<code>crontab -e</code> 을 실행하고 <code>0 1 * * * /path/command.sh</code> 와 같은 형식으로 cronjob을 등록했다.<br>
+매일 새벽 1시에 <code>/path/command.sh</code>를 실행한다는 의미이다. cronjob의 시간 형식은 정말 다양하기 때문에 한번쯤 찾아보는걸 추천한다.<br>
+이제 매일매일 자동으로 내 플레이리스트에 추가된 노래를 지정된 디렉토리에 다운받을 수 있다. nPlayer같은 FTP를 지원하는 미디어플레이어 등을 이용해 서버와 연결해서 노래를 들을 수 있다. 개선의 여지가 많지만 일단은 한동안 이 방법에 큰 불편함 없이 잘 사용했다.</p>
+<p>이 방법에서 큰 불편함을 느낀 계기는 플레이리스트에 있는 영상 중 하나가 어떤 이유 때문에 접근이 안됐었다. 저작권 이슈였던가 해당 국가에서 차단됐던가 둘 중 하나였을 것이다. 그런데 새로 추가한 노래가 다운로드되지 않는다는 걸 한참 뒤에야 알게 되었고, 중간에 어떤 영상에서 다운로드가 실패했을 때 abort되는걸 그때 알게 되었다.<br>
+이 방법은 에러처리와 로깅이 제한적이라고 생각돼서 youtube-dl 이라는 커맨드 툴에 의존하지 않는 방법을 찾아보았다.</p>
+<p>youtube-dl은 커맨드라인 툴로 배포되는 프로젝트였고, 코어는 python이었다. 다행히 Python 패키지로도 제공하고 있었고 이 패키지를 이용한 Python 프로젝트를 시작해야겠다고 마음먹었다. Python으로 만들면 --download-archive 옵션으로 파일에 video_id를 추가하는 방식을 DB에 새 row를 추가하는 방식으로 개선할 수 있겠단 생각이 들었다.</p>
+<p>youtube-dl github repo에 있는 python 예제들을 참고하며 프로젝트를 시작했다. 프로젝트의 과정은 다음과 같다.<br>
+cmd로 지정했던 옵션들을 <code>ydl_opts</code>에 설정하고 플레이리스트 URL을 전달해서 플레이리스트에 포함된 영상들의 video_id를 가져온다.<br>
+DB에 저장된 video_id들과 비교하며 새로 추가된 video_id를 리스트에 추가한다.<br>
+<code>ydl.download()</code>의 인자로 리스트를 넘기고 다운로드받는다.<br>
+다운로드가 완료되면 DB에 video_id를 새로 추가한다.</p>
+<p>Documentation만 잘 찾아보면 큰 어려움 없이 구현할 수 있는 프로젝트였다. 나름 만족스러운 작업이었지만 Python으로 짜고나니 개선할 여지가 더 많이 보였다.<br>
+플레이리스트별로 Thread Worker를 만드는 코드와 특정 영상에서 다운로드가 실패할때 에러처리를 하는 코드도 추가했다.</p>
+<p>현재는 등록된 모든 플레이리스트(예를들면 Pop, Rock, Piano 등등…)를 매번 조회한다. Pop 플레이리스트에 노래를 하나 추가하더라도 모든 플레이리스트를 조회하는게 비효율적이라고 느꼈다. 해결 방법으로는 <code>simple_term_menu</code> 를 이용해 cmd에서 특정 플레이리스트를 선택하는 기능을 구현 중이다.<br>
+이것 말고도 개선할 점이 아직 너무 많은 프로젝트이다. 그래서 더 재밌고 손이 자주가는 것 같다.</p>
+
+
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
+            
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+    <hr />
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                        <li>
+                            <a href="https://twitter.com/bbvch13531" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+
+                    
+                        <li>
+                            <a href="https://github.com/bbvch13531" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+
+                    
+
+                    
+                </ul>
+                <p class="copyright text-muted">&copy; 2023 KY<br></p>
+                <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p>
+                <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <!-- After footer scripts -->
+    
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>
